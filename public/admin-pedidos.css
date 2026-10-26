@@ -1,0 +1,240 @@
+/* Telas de pedidos — complementa admin.css e fluxo.css */
+
+.ped-linha {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto 110px;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #ecd9d4;
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: .2s;
+}
+
+.ped-linha:hover {
+  border-color: #B76E79;
+  box-shadow: 0 4px 14px rgba(183, 110, 121, .15);
+  transform: translateY(-1px);
+}
+
+.ped-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: #8A4A54;
+}
+
+.ped-data,
+.ped-meta {
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+.ped-cliente {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ped-total {
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ---------- detalhe ---------- */
+
+.ped-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 14px 0 22px;
+}
+
+.ped-cabecalho .adm-badge {
+  font-size: 15px;
+  padding: 6px 16px;
+}
+
+.ped-lateral .fx-resumo,
+.fx-coluna.ped-lateral {
+  position: static;
+}
+
+.fx-coluna.ped-lateral {
+  align-self: start;
+}
+
+@media (min-width: 901px) {
+  .fx-coluna.ped-lateral {
+    position: sticky;
+    top: 92px;
+  }
+}
+
+.ped-item {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0e0dc;
+}
+
+.ped-item:first-of-type {
+  padding-top: 0;
+}
+
+.ped-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.ped-item img,
+.ped-sem-foto {
+  width: 64px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #F7D9D3;
+}
+
+.ped-item-nome {
+  font-weight: 600;
+}
+
+.ped-item-sub {
+  font-weight: 700;
+  color: #8A4A54;
+  white-space: nowrap;
+}
+
+.ped-dado {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f6ebe8;
+}
+
+.ped-dado:last-child {
+  border-bottom: none;
+}
+
+.ped-rotulo {
+  color: #6b6b6b;
+  font-size: 14px;
+}
+
+.fx-card .fx-campo {
+  margin-bottom: 14px;
+}
+
+.fx-campo select {
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid #d6bfbb;
+  border-radius: 10px;
+  font: inherit;
+  background: #fff;
+  color: #2e2e2e;
+}
+
+.fx-campo select:focus {
+  outline: none;
+  border-color: #B76E79;
+  box-shadow: 0 0 0 3px rgba(183, 110, 121, .25);
+}
+
+.ped-etiqueta {
+  display: inline-block;
+  margin-top: 14px;
+}
+
+@media (max-width: 720px) {
+
+  .ped-linha {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 12px;
+  }
+
+  .ped-total {
+    text-align: left;
+  }
+
+  .ped-dado {
+    grid-template-columns: 90px minmax(0, 1fr);
+  }
+}
+
+
+/* ---------- envio e etiqueta ---------- */
+
+.ped-acoes {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ped-acoes .fx-btn,
+.ped-form-etiqueta .fx-btn {
+  margin-top: 0;
+}
+
+.ped-form-etiqueta {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #f0e0dc;
+}
+
+.ped-form-etiqueta .fx-campo {
+  margin-bottom: 12px;
+}
+
+.ped-form-etiqueta .fx-sub {
+  margin-bottom: 12px;
+}
+
+.ped-manual {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #f0e0dc;
+}
+
+.ped-manual summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #8A4A54;
+  margin-bottom: 12px;
+}
+
+.ped-manual .fx-btn {
+  margin-top: 4px;
+}
+
+.adm-aviso-info {
+  background: #FAE9E1;
+  border: 1px solid #ecd0c8;
+  color: #5b3a3f;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin: 12px 0;
+}
+
+/* aviso gerado pelo sistema no topo do pedido */
+.ped-alerta {
+  margin: 0 0 16px;
+  background: #fff4e0;
+  border-color: #f0c987;
+  color: #7a4a00;
+}
+
+.ped-alerta .fx-link {
+  margin-top: 6px;
+  color: #7a4a00;
+}

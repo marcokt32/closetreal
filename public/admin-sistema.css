@@ -1,0 +1,80 @@
+/* Página "Sistema" do painel */
+
+.sis-pagina { max-width: 860px; }
+.sis-intro { margin: -6px 0 18px; }
+
+.sis-bloco { margin-bottom: 22px; }
+.sis-bloco h2 { color: #B76E79; margin: 0 0 6px; }
+
+.sis-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fx .sis-btn,
+.fx .sis-acoes .fx-btn {
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  padding: 11px 20px;
+}
+
+.sis-acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+
+.sis-resumo { margin: 10px 0 14px; font-weight: 700; }
+.sis-resumo.ok { color: #2f7d4f; }
+.sis-resumo.aviso { color: #8a5a00; }
+.sis-resumo.erro { color: #B3261E; }
+
+.sis-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+
+.sis-item {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 12px 14px;
+  border: 1px solid #ecd9d4;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.sis-icone {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 16px;
+  background: #eee;
+  color: #555;
+}
+
+.sis-item.ok .sis-icone { background: #dff1e6; color: #1f6a3e; }
+.sis-item.aviso .sis-icone { background: #fff0cf; color: #8a5a00; }
+.sis-item.erro .sis-icone { background: #fdecea; color: #B3261E; }
+.sis-item.erro { border-color: #f2b8b5; background: #fff8f7; }
+.sis-item.aviso { border-color: #f0d7a0; }
+
+.sis-item strong { display: block; color: #2e2e2e; }
+.sis-item div span { display: block; color: #555; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+
+.sis-resposta { margin: 12px 0 0; color: #2e2e2e; }
+.sis-resposta:empty { display: none; }
+.sis-resposta.erro { color: #B3261E; font-weight: 600; }
+.sis-resposta .sis-selo {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 11px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.sis-resposta .sis-selo.teste { background: #fff0cf; color: #8a5a00; }
+.sis-resposta .sis-selo.real { background: #dff1e6; color: #1f6a3e; }
+
+.sis-aviso { margin-top: 14px; }

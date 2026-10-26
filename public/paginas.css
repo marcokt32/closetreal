@@ -1,0 +1,127 @@
+/* Páginas informativas: trocas e devoluções, privacidade e contato (body.fx) */
+
+.lp-pagina { max-width: 820px; }
+
+.lp-pagina h1 { color: #B76E79; margin-bottom: 6px; }
+
+.lp-atualizado { color: #6b6b6b; font-size: 14px; margin-bottom: 22px; }
+
+.lp-destaque {
+  padding: 16px 18px;
+  margin-bottom: 22px;
+  border: 1px solid #ecd9d4;
+  border-left: 5px solid #B76E79;
+  border-radius: 12px;
+  background: #FAE9E1;
+  color: #4a3036;
+}
+
+.lp-indice {
+  display: block;
+  margin: 0 0 26px;
+  padding: 14px 18px;
+  border: 1px solid #ecd9d4;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.lp-indice strong { display: block; margin-bottom: 6px; color: #8A4A54; }
+.lp-indice ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 28px; }
+.lp-indice li { margin: 3px 0; break-inside: avoid; }
+.lp-indice a { color: #8A4A54; }
+
+.lp-secao {
+  margin-bottom: 26px;
+  scroll-margin-top: 90px;
+}
+
+.lp-secao h2 {
+  color: #8A4A54;
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.lp-secao p, .lp-secao li { color: #2e2e2e; line-height: 1.65; }
+.lp-secao p { margin-bottom: 10px; }
+.lp-secao ul, .lp-secao ol { margin: 0 0 12px; padding-left: 22px; }
+.lp-secao li { margin: 5px 0; }
+.lp-secao a { color: #8A4A54; font-weight: 600; }
+
+.lp-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 14px;
+  font-size: 15px;
+}
+
+.lp-tabela th, .lp-tabela td {
+  padding: 10px 12px;
+  border: 1px solid #ecd9d4;
+  text-align: left;
+  vertical-align: top;
+}
+
+.lp-tabela th { background: #FAE9E1; color: #5a3a40; }
+
+.lp-aviso-legal {
+  margin-top: 30px;
+  padding-top: 14px;
+  border-top: 1px solid #ecd9d4;
+  color: #6b6b6b;
+  font-size: 13px;
+}
+
+/* ---------- contato ---------- */
+
+.lp-contatos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 18px 0 26px;
+}
+
+.lp-contato {
+  padding: 18px;
+  border: 1px solid #ecd9d4;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.lp-contato h2 { color: #B76E79; font-size: 17px; margin-bottom: 6px; }
+.lp-contato p { margin: 0 0 6px; overflow-wrap: anywhere; color: #2e2e2e; }
+.lp-contato a { color: #8A4A54; font-weight: 600; }
+
+.lp-contato .fx-btn {
+  display: inline-block;
+  width: auto;
+  margin: 8px 0 0;
+  padding: 11px 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.lp-atalhos { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+.lp-atalhos a {
+  padding: 10px 16px;
+  border: 1px solid #B76E79;
+  border-radius: 10px;
+  color: #8A4A54;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.lp-atalhos a:hover { background: #F7D9D3; }
+
+@media (max-width: 640px) {
+  .lp-indice ol { columns: 1; }
+  .lp-tabela { font-size: 14px; }
+  .lp-tabela th, .lp-tabela td { padding: 8px; }
+}
+
+.lp-destaque a,
+.lp-aviso-legal a,
+.lp-atualizado a {
+  color: #8A4A54;
+  font-weight: 600;
+}

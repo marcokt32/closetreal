@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho | Closet Real</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="fluxo.css">
+    <link rel="stylesheet" href="menu-mobile.css">
+</head>
+
+<body class="fx">
+
+    <header>
+        <a class="fx-logo-link" href="/">
+            <div class="logo">
+                <img src="./img/Logo CR fundo transparente.png" alt="logo closet real" class="logoimg">
+                <div>
+                    <h1>Closet Real</h1>
+                    <span>Moda Feminina</span>
+                </div>
+            </div>
+        </a>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/?colecao=novidades#vitrine">Novidades</a>
+            <a href="/?colecao=promocoes#vitrine">Promoções</a>
+            <a href="/contato.html">Contato</a>
+            <a href="./consultar.html">Meus pedidos</a>
+        </nav>
+
+        <a class="btn-carrinho" href="/carrinho.html">
+            🛒 Carrinho
+            <span id="contadorCarrinho">0</span>
+        </a>
+    </header>
+
+    <div class="fx-faixa">
+        <ol class="fx-etapas" aria-label="Etapas da compra">
+            <li class="atual" aria-current="step"><span>1</span> Carrinho</li>
+            <li><span>2</span> Entrega</li>
+            <li><span>3</span> Pagamento</li>
+        </ol>
+    </div>
+
+    <main class="fx-pagina">
+
+        <div class="fx-cabecalho">
+            <h1 class="fx-titulo">Seu carrinho</h1>
+            <button class="fx-link" id="btnLimpar" onclick="limparCarrinho()" hidden>Esvaziar carrinho</button>
+        </div>
+
+        <div id="erroCarrinho" class="fx-aviso" role="alert"></div>
+
+        <section id="vazio" class="fx-vazio" hidden>
+            <h2>Seu carrinho está vazio</h2>
+            <p>Escolha suas peças favoritas e elas aparecem aqui.</p>
+            <a class="fx-btn" href="/#catalogo">Ver produtos</a>
+        </section>
+
+        <div id="cheio" class="fx-grid" hidden>
+
+            <section class="fx-card" aria-label="Itens do carrinho">
+                <div id="listaCarrinho"></div>
+            </section>
+
+            <aside class="fx-resumo">
+                <h2>Resumo</h2>
+
+                <div class="fx-linha fx-total">
+                    <span id="rotuloSubtotal">Subtotal</span>
+                    <strong id="subtotal">R$ 0,00</strong>
+                </div>
+                <p class="fx-nota">O frete é calculado na próxima etapa, com o seu CEP.</p>
+
+                <a class="fx-btn" href="/checkout.html">Finalizar compra</a>
+                <a class="fx-btn fx-btn-sec" href="/">Continuar comprando</a>
+
+                <p class="fx-seguro">🔒 Pagamento protegido pelo Mercado Pago</p>
+            </aside>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <div>
+            <h3>Closet Real</h3>
+            <p>Loja especializada em moda feminina.</p>
+        </div>
+        <div>
+            <h3>Pagamento Seguro</h3>
+            <p>Processado por Mercado Pago.</p>
+        </div>
+        <div>
+            <h3>Atendimento</h3>
+            <p>Segunda a Sexta</p>
+        </div>
+    </footer>
+
+    <script src="loja-carrinho.js"></script>
+    <script src="menu-mobile.js"></script>
+    <script src="rodape.js"></script>
+    <script src="aparencia.js"></script>
+    <script src="carrinho.js"></script>
+
+</body>
+
+</html>

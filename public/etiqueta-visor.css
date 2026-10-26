@@ -1,0 +1,89 @@
+/* Visor da etiqueta (painel admin): abre o PDF dentro da página e imprime dali */
+
+.vz {
+  margin: auto;
+  width: min(900px, calc(100vw - 24px));
+  height: min(92dvh, 900px);
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: #fff;
+  color: #2e2e2e;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .35);
+  overflow: hidden;
+}
+
+.vz[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.vz::backdrop { background: rgba(26, 26, 26, .6); }
+
+.vz * { box-sizing: border-box; }
+
+.vz-topo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0e2dd;
+}
+
+.vz-topo h2 {
+  flex: 1 1 160px;
+  margin: 0;
+  color: #B76E79;
+  font-size: 18px;
+}
+
+.vz-btn {
+  padding: 10px 16px;
+  border: 1px solid #B76E79;
+  border-radius: 10px;
+  background: #fff;
+  color: #8A4A54;
+  font: 600 14px/1 'Segoe UI', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.vz-btn:hover:not(:disabled) { background: #F7D9D3; }
+.vz-btn:disabled { opacity: .45; cursor: not-allowed; }
+.vz-btn:focus-visible { outline: 3px solid #B76E79; outline-offset: 2px; }
+
+.vz-btn.principal { background: #B76E79; color: #fff; }
+.vz-btn.principal:hover:not(:disabled) { background: #A05A65; }
+
+.vz-corpo {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  background: #efe6e3;
+}
+
+.vz-corpo iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
+
+.vz-msg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  color: #5a3a40;
+}
+
+.vz-msg.erro { color: #8c1d18; }
+
+@media (max-width: 640px) {
+  .vz { width: 100vw; height: 100dvh; border-radius: 0; }
+}

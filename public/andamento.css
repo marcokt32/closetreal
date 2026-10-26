@@ -1,0 +1,56 @@
+/* Linha do tempo do pedido (usada em "Pedido recebido" e "Meus pedidos") */
+
+.pr-passos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.pr-passos li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 12px;
+  padding-bottom: 18px;
+}
+
+.pr-passos li:last-child { padding-bottom: 0; }
+
+.pr-passos li::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 30px;
+  bottom: 0;
+  width: 2px;
+  background: #ecd9d4;
+}
+
+.pr-passos li:last-child::before { display: none; }
+
+.pr-passos .bolinha {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #d9bfc3;
+  border-radius: 50%;
+  background: #fff;
+  color: #a98a90;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pr-passos li.feito .bolinha { background: #2f7d4f; border-color: #2f7d4f; color: #fff; }
+.pr-passos li.feito::before { background: #2f7d4f; }
+.pr-passos li.atual .bolinha { border-color: #B76E79; color: #B76E79; box-shadow: 0 0 0 4px rgba(183, 110, 121, .18); }
+.pr-passos li.cancelado .bolinha { background: #B3261E; border-color: #B3261E; color: #fff; }
+
+.pr-passos strong { display: block; color: #2e2e2e; }
+.pr-passos li:not(.feito):not(.atual):not(.cancelado) strong { color: #8a8a8a; }
+.pr-passos li.cancelado strong { color: #B3261E; }
+.pr-passos small { display: block; color: #6b6b6b; font-size: 13px; }
+.pr-passos .pr-quando { color: #8A4A54; font-size: 12px; font-weight: 600; margin-top: 2px; }
+.pr-passos .pr-passo-link { color: #8A4A54; font-weight: 600; font-size: 13px; }

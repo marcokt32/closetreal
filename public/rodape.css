@@ -1,0 +1,38 @@
+/* Rodapé montado pelo rodape.js */
+
+footer.rodape-loja nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+footer.rodape-loja a {
+  color: #E8C9CD;
+  font-weight: 400;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+footer.rodape-loja a:hover,
+footer.rodape-loja a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+}
+
+footer.rodape-loja a:focus-visible {
+  outline: 2px solid #B76E79;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+footer.rodape-loja p + p { margin-top: 6px; }
+
+footer.rodape-loja .rodape-pequeno {
+  font-size: 13px;
+  color: #a9a9a9;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  footer.rodape-loja { padding: 32px 22px 96px; }
+}

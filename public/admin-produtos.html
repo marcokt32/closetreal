@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos | Administração</title>
+    <link rel="stylesheet" href="fluxo.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin-produtos.css">
+</head>
+
+<body class="fx adm">
+
+    <header class="adm-topo">
+        <strong class="adm-marca">Closet Real <span>Admin</span></strong>
+        <nav class="adm-menu">
+            <a href="/pedidos.html">Pedidos</a>
+            <a href="/admin-produtos.html" aria-current="page">Produtos</a>
+            <a href="/aparencia-admin.html">Aparência</a>
+            <a href="/sistema-admin.html">Sistema</a>
+            <a href="/" target="_blank" rel="noopener">Ver loja ↗</a>
+            <button type="button" class="fx-link" id="btnSair">Sair</button>
+        </nav>
+    </header>
+
+    <main class="adm-pagina">
+
+        <div class="adm-barra">
+            <h1 class="fx-titulo">Produtos</h1>
+            <div class="adm-acoes">
+                <button type="button" class="fx-btn fx-btn-sec adm-importar" id="btnCategorias">🗂 Categorias</button>
+                <button type="button" class="fx-btn fx-btn-sec adm-importar" id="btnImportar">⬆ Importar planilha</button>
+                <button type="button" class="fx-btn adm-novo" id="btnNovo">＋ Novo produto</button>
+            </div>
+        </div>
+
+        <div class="adm-filtros">
+            <input id="busca" type="search" placeholder="Buscar produto pelo nome ou ID" aria-label="Buscar produto pelo nome ou ID">
+
+            <select id="filtroCategoria" aria-label="Categoria">
+                <option value="todas">Todas as categorias</option>
+            </select>
+
+            <select id="filtro" aria-label="Situação">
+                <option value="todos">Qualquer situação</option>
+                <option value="ativos">Na loja</option>
+                <option value="ocultos">Ocultos</option>
+                <option value="esgotados">Esgotados</option>
+                <option value="estoquebaixo">Estoque baixo (1 a 3)</option>
+                <option value="sempreco">Sem preço</option>
+                <option value="semfoto">Sem foto</option>
+            </select>
+
+            <select id="ordem" aria-label="Ordenar por">
+                <option value="padrao">Ordem padrão</option>
+                <option value="nome">Nome (A–Z)</option>
+                <option value="menor-preco">Menor preço</option>
+                <option value="maior-preco">Maior preço</option>
+                <option value="menor-estoque">Menor estoque</option>
+            </select>
+
+            <button type="button" class="fx-link" id="btnLimparFiltros" hidden>Limpar filtros</button>
+
+            <span id="contagem" class="fx-sub"></span>
+        </div>
+
+        <div id="erroLista" class="fx-aviso" role="alert"></div>
+
+        <div id="lista" class="adm-lista"></div>
+
+    </main>
+
+    <dialog id="editor" class="adm-editor" aria-labelledby="editorTitulo">
+
+        <form id="formProduto" novalidate>
+
+            <div class="adm-editor-topo">
+                <div>
+                    <h2 id="editorTitulo">Novo produto</h2>
+                    <p id="editorId" class="fx-sub"></p>
+                </div>
+                <button type="button" class="adm-fechar" id="btnFechar" aria-label="Fechar">✕</button>
+            </div>
+
+            <div class="adm-editor-corpo">
+
+                <section class="adm-bloco">
+                    <h3>Informações</h3>
+
+                    <div class="fx-campos">
+                        <div class="fx-campo">
+                            <label for="nome">Nome do produto</label>
+                            <input id="nome" maxlength="200" placeholder="Ex.: Vestido Midi Floral">
+                        </div>
+                        <div class="fx-campo">
+                            <label for="descricao">Descrição</label>
+                            <textarea id="descricao" rows="3" maxlength="2000" placeholder="Tecido, caimento, cuidados..."></textarea>
+                        </div>
+                        <div class="fx-campo m3">
+                            <label for="preco">Preço (R$)</label>
+                            <input id="preco" inputmode="decimal" placeholder="0,00">
+                        </div>
+                        <div class="fx-campo m3">
+                            <label for="categoria">Categoria</label>
+                            <select id="categoria">
+                                <option value="">Sem categoria</option>
+                            </select>
+                            <button type="button" class="fx-link adm-gerir-cat" id="btnGerirCatEditor">Gerenciar categorias</button>
+                        </div>
+                        <div class="fx-campo m3">
+                            <label for="precoAntigo">Preço antigo (R$) <span class="fx-sub">opcional</span></label>
+                            <input id="precoAntigo" inputmode="decimal" placeholder="0,00" aria-describedby="dicaPrecoAntigo">
+                            <span class="fx-sub" id="dicaPrecoAntigo">Para colocar em Promoções: o valor antigo aparece riscado e o preço acima é o preço da promoção. Deixe em branco para tirar.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="adm-bloco">
+                    <h3>Fotos</h3>
+                    <p class="fx-sub">A primeira foto é a capa. Até 9 fotos (JPG, PNG ou WebP).</p>
+
+                    <div id="fotos" class="adm-fotos"></div>
+
+                    <label class="fx-btn fx-btn-sec adm-add-foto" id="rotuloFoto">
+                        ＋ Adicionar fotos
+                        <input type="file" id="arquivoFoto" accept="image/jpeg,image/png,image/webp" multiple hidden>
+                    </label>
+
+                    <p id="statusFoto" class="fx-sub" role="status"></p>
+                </section>
+
+                <section class="adm-bloco">
+                    <h3>Estoque</h3>
+
+                    <div class="adm-tipo" role="radiogroup" aria-label="Tipo de estoque">
+                        <label><input type="radio" name="tipo" value="unico" checked> Sem variação (um estoque só)</label>
+                        <label><input type="radio" name="tipo" value="tamanhos"> Com cor e/ou tamanho</label>
+                    </div>
+
+                    <div id="blocoUnico" class="fx-campos">
+                        <div class="fx-campo m3">
+                            <label for="estoqueUnico">Quantidade em estoque</label>
+                            <input id="estoqueUnico" type="number" min="0" max="9999" value="0">
+                        </div>
+                    </div>
+
+                    <div id="blocoTamanhos" hidden>
+                        <p class="fx-sub">Cada linha é uma combinação de cor e tamanho, com o seu próprio estoque. Pode usar só cor, só tamanho ou os dois.</p>
+
+                        <div id="linhasTamanho"></div>
+
+                        <div class="adm-gerador">
+                            <p class="adm-opcoes-titulo">Criar várias de uma vez</p>
+
+                            <div class="fx-campo">
+                                <label for="gerarCores">Cores <span class="fx-sub">(separe por vírgula; deixe vazio se a peça não tem cor)</span></label>
+                                <input id="gerarCores" maxlength="300" placeholder="Ex.: Preto, Branco, Azul Jeans">
+                            </div>
+
+                            <div class="adm-presets">
+                                <span class="fx-sub">Tamanhos:</span>
+                                <button type="button" class="adm-preset" data-tam="P" aria-pressed="false">P</button>
+                                <button type="button" class="adm-preset" data-tam="M" aria-pressed="false">M</button>
+                                <button type="button" class="adm-preset" data-tam="G" aria-pressed="false">G</button>
+                                <button type="button" class="adm-preset" data-tam="GG" aria-pressed="false">GG</button>
+                                <input id="gerarOutrosTam" class="adm-outros-tam" maxlength="100" placeholder="Outros: 36, 38, 40" aria-label="Outros tamanhos, separados por vírgula">
+                            </div>
+
+                            <div class="adm-acoes adm-gerador-acoes">
+                                <button type="button" class="fx-btn fx-btn-sec adm-add-foto" id="btnGerar">＋ Criar combinações</button>
+                                <button type="button" class="fx-link" id="btnAddLinha">Adicionar uma linha em branco</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="adm-bloco">
+                    <h3>Envio <span class="fx-sub">(opcional)</span></h3>
+                    <p class="fx-sub">Usado no cálculo do frete. Em branco, vale o padrão da loja.</p>
+
+                    <div class="fx-campos">
+                        <div class="fx-campo m3">
+                            <label for="peso">Peso (kg)</label>
+                            <input id="peso" inputmode="decimal" placeholder="Ex.: 0,3">
+                        </div>
+                        <div class="fx-campo m3"></div>
+                        <div class="fx-campo m2">
+                            <label for="largura">Largura (cm)</label>
+                            <input id="largura" inputmode="decimal">
+                        </div>
+                        <div class="fx-campo m2">
+                            <label for="altura">Altura (cm)</label>
+                            <input id="altura" inputmode="decimal">
+                        </div>
+                        <div class="fx-campo m2">
+                            <label for="comprimento">Comprimento (cm)</label>
+                            <input id="comprimento" inputmode="decimal">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="adm-bloco">
+                    <label class="adm-check">
+                        <input type="checkbox" id="ativo">
+                        <span>Mostrar na loja</span>
+                    </label>
+                    <p class="fx-sub">Desmarcado, o produto fica salvo mas o cliente não vê.</p>
+                </section>
+
+                <section class="adm-bloco">
+                    <label class="adm-check">
+                        <input type="checkbox" id="destaque">
+                        <span>Destacar na loja ⭐</span>
+                    </label>
+                    <p class="fx-sub">Marca o produto com o selo "Destaque", mostra no filtro "Destaques" e usa a capa dele no banner da página inicial quando você não tiver enviado imagens de banner.</p>
+                </section>
+
+                <div id="erroForm" class="fx-aviso" role="alert"></div>
+
+            </div>
+
+            <div class="adm-editor-rodape">
+                <button type="button" class="fx-link adm-excluir" id="btnExcluir" hidden>Excluir produto</button>
+                <span class="adm-espaco"></span>
+                <button type="button" class="fx-btn fx-btn-sec" id="btnCancelar">Cancelar</button>
+                <button type="submit" class="fx-btn" id="btnSalvar">Salvar</button>
+            </div>
+
+        </form>
+
+    </dialog>
+
+    <dialog id="gerCategorias" class="adm-editor adm-cats" aria-labelledby="catTitulo">
+
+        <div class="adm-editor-topo">
+            <div>
+                <h2 id="catTitulo">Categorias da loja</h2>
+                <p class="fx-sub">Aparecem como filtros na vitrine. Excluir uma categoria não apaga os produtos: eles ficam sem categoria.</p>
+            </div>
+            <button type="button" class="adm-fechar" id="btnFecharCats" aria-label="Fechar">✕</button>
+        </div>
+
+        <div class="adm-editor-corpo">
+
+            <form id="formNovaCategoria" class="adm-cat-nova" novalidate>
+                <label for="novaCategoria" class="adm-opcoes-titulo">Nova categoria</label>
+                <div class="adm-cat-nova-linha">
+                    <input id="novaCategoria" maxlength="40" placeholder="Ex.: Conjuntos" autocomplete="off">
+                    <button type="submit" class="fx-btn" id="btnAddCategoria">Adicionar</button>
+                </div>
+            </form>
+
+            <div id="erroCats" class="fx-aviso" role="alert"></div>
+
+            <div id="listaCats" class="adm-cat-lista"></div>
+
+        </div>
+
+        <div class="adm-editor-rodape">
+            <span class="adm-espaco"></span>
+            <button type="button" class="fx-btn" id="btnConcluirCats">Concluir</button>
+        </div>
+
+    </dialog>
+
+    <dialog id="importador" class="adm-editor adm-importador" aria-labelledby="importadorTitulo">
+
+        <div class="adm-editor-topo">
+            <h2 id="importadorTitulo">Importar planilha de produtos</h2>
+            <button type="button" class="adm-fechar" id="btnFecharImport" aria-label="Fechar">✕</button>
+        </div>
+
+        <div class="adm-editor-corpo">
+
+            <section id="importEtapa1" class="adm-bloco">
+
+                <p class="adm-opcoes-titulo">1. Qual planilha você vai enviar?</p>
+
+                <div class="adm-modos" role="radiogroup" aria-label="Tipo de planilha">
+
+                    <label class="adm-modo">
+                        <input type="radio" name="modoImport" value="modelo" checked>
+                        <span>
+                            <strong>Modelo padrão da loja</strong>
+                            <span class="fx-sub">Cadastra produtos novos e altera vários de uma vez: nome, descrição, categoria, preço, cores, tamanhos, estoque, fotos e medidas do frete.</span>
+                        </span>
+                    </label>
+
+                    <label class="adm-modo">
+                        <input type="radio" name="modoImport" value="shopee">
+                        <span>
+                            <strong>Planilha da Shopee</strong>
+                            <span class="fx-sub">Alteração em massa (informações de venda): atualiza o preço e o estoque dos produtos.</span>
+                        </span>
+                    </label>
+
+                </div>
+
+                <div id="ajudaModelo" class="adm-ajuda">
+                    <p class="fx-sub">
+                        Baixe o modelo, preencha (uma linha por cor e tamanho) e envie no passo 2.
+                        Para alterar produtos que já existem, comece pela planilha com os seus produtos atuais:
+                        edite o que quiser e envie de volta.
+                    </p>
+                    <div class="adm-acoes">
+                        <a class="fx-btn fx-btn-sec adm-add-foto" href="/api/admin/planilha/modelo.xlsx" download>⬇ Baixar modelo (.xlsx)</a>
+                        <a class="fx-btn fx-btn-sec adm-add-foto" href="/api/admin/planilha/produtos.xlsx" download>⬇ Baixar meus produtos atuais</a>
+                    </div>
+                </div>
+
+                <div id="ajudaShopee" class="adm-ajuda" hidden>
+                    <p class="fx-sub"><strong>Qual arquivo da Shopee enviar</strong></p>
+                    <ol class="adm-passos">
+                        <li>Na Central do Vendedor da Shopee, abra <strong>Meus Produtos</strong> e use a opção de <strong>alteração (atualização) em massa</strong>.</li>
+                        <li>Escolha a planilha de <strong>“Informações de venda”</strong> e baixe o arquivo. O nome dele começa com <code>mass_update_sales_info</code>.</li>
+                        <li>Envie o arquivo aqui do jeito que veio, em <strong>.csv ou .xlsx</strong>, sem alterar.</li>
+                    </ol>
+                    <p class="fx-sub">
+                        Os produtos são reconhecidos pelo ID da Shopee. A cor e o tamanho de cada variação
+                        (ex.: “Preto,GG”) viram variações da loja, cada uma com o seu estoque.
+                    </p>
+                </div>
+
+                <p class="adm-opcoes-titulo adm-passo2">2. Envie o arquivo preenchido</p>
+
+                <label class="fx-btn fx-btn-sec adm-add-foto" id="rotuloPlanilha">
+                    Escolher arquivo (.xlsx ou .csv)
+                    <input type="file" id="arquivoPlanilha" accept=".xlsx,.csv,.txt,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+                </label>
+                <span id="nomeArquivo" class="fx-sub"></span>
+
+                <p class="fx-sub adm-nada-grava">Nada é gravado antes de você conferir a prévia e confirmar.</p>
+
+                <div class="adm-opcoes" id="opcoesShopee" hidden>
+                    <p class="adm-opcoes-titulo">O que atualizar</p>
+                    <label class="adm-check"><input type="checkbox" id="opPreco" checked> Preço</label>
+                    <label class="adm-check"><input type="checkbox" id="opEstoque" checked> Estoque</label>
+                    <label class="adm-check"><input type="checkbox" id="opTamanhos" checked><span>Criar as cores e tamanhos que a loja ainda não tem <span class="fx-sub">(ex.: produto que estava só com “Único” passa a ter Preto P, Preto M, Branco P...)</span></span></label>
+                    <label class="adm-check"><input type="checkbox" id="opCadastrar"><span>Cadastrar produtos que ainda não existem na loja <span class="fx-sub">(entram ocultos, sem fotos nem descrição)</span></span></label>
+                    <label class="adm-check"><input type="checkbox" id="opConferir"><span>Incluir produtos com nome muito diferente <span class="fx-sub">(mesmo ID, mas parece outro produto: confira antes)</span></span></label>
+                </div>
+
+            </section>
+
+            <div id="erroImport" class="fx-aviso" role="alert"></div>
+
+            <section id="importPrevia" class="adm-bloco" hidden>
+                <div id="avisosImport" class="adm-avisos"></div>
+                <div id="abasImport" class="adm-chips" role="group" aria-label="Ver por situação"></div>
+                <div id="tabelaImport" class="adm-tabela"></div>
+            </section>
+
+            <section id="importResultado" class="adm-bloco" hidden></section>
+
+        </div>
+
+        <div class="adm-editor-rodape">
+            <span class="adm-espaco"></span>
+            <button type="button" class="fx-btn fx-btn-sec" id="btnCancelarImport">Cancelar</button>
+            <button type="button" class="fx-btn" id="btnAplicarImport" disabled>Importar</button>
+        </div>
+
+    </dialog>
+
+    <script src="admin-produtos.js"></script>
+
+</body>
+
+</html>

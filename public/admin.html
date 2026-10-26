@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | Administração</title>
+    <link rel="stylesheet" href="fluxo.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="fx adm adm-login-pagina">
+
+    <main class="adm-login">
+
+        <strong class="adm-marca">Closet Real</strong>
+        <h1>Área administrativa</h1>
+
+        <form id="formLogin">
+
+            <div class="fx-campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" autocomplete="current-password" autofocus>
+            </div>
+
+            <p id="avisoSessao" class="fx-sub" role="status"></p>
+
+            <div id="erroLogin" class="fx-aviso" role="alert"></div>
+
+            <button type="submit" class="fx-btn" id="btnEntrar">Entrar</button>
+
+        </form>
+
+    </main>
+
+    <script>
+
+        // Se já existe uma sessão válida, vai direto para os pedidos.
+        // Depois de "Sair" ou de uma sessão vencida isso não acontece (senão a pessoa nunca chega ao login).
+        const motivo = new URLSearchParams(window.location.search);
+
+        if (motivo.has("saiu") || motivo.has("expirou")) {
+
+            document.getElementById("avisoSessao").textContent = motivo.has("saiu")
+                ? "Você saiu do painel."
+                : "Sua sessão expirou. Entre novamente para continuar.";
+
+        } else {
+
+            fetch("/api/admin-sessao", { cache: "no-store" }).then(r => {
+                if (r.ok) window.location.href = "/pedidos.html";
+            });
+        }
+
+        document.getElementById("formLogin").addEventListener("submit", async evento => {
+
+            evento.preventDefault();
+
+            const senha = document.getElementById("senha").value;
+            const erro = document.getElementById("erroLogin");
+            const botao = document.getElementById("btnEntrar");
+
+            erro.textContent = "";
+
+            if (!senha) {
+                erro.textContent = "Digite a senha.";
+                return;
+            }
+
+            botao.disabled = true;
+
+            try {
+
+                const resposta = await fetch("/api/admin-login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ senha })
+                });
+
+                if (resposta.ok) {
+                    window.location.href = "/pedidos.html";
+                    return;
+                }
+
+                erro.textContent = resposta.status === 429
+                    ? "Muitas tentativas. Aguarde 15 minutos."
+                    : "Senha incorreta.";
+
+            } catch {
+                erro.textContent = "Não foi possível conectar ao servidor.";
+            }
+
+            botao.disabled = false;
+        });
+
+    </script>
+
+</body>
+
+</html>

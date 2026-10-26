@@ -1,0 +1,243 @@
+/* Logo personalizado e banner (carrossel) da página inicial.
+   As cores seguem o tema escolhido no painel (o servidor troca a cor principal ao entregar este arquivo). */
+
+/* ---------- logo escolhido no painel: respeita a proporção da imagem ---------- */
+
+.logoimg.logo-personalizado {
+  width: auto;
+  height: 52px;
+  max-width: 220px;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  .logoimg.logo-personalizado {
+    height: 42px;
+    max-width: 150px;
+  }
+}
+
+/* ---------- banner / carrossel ---------- */
+
+.hero.hero-carrossel {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  overflow: hidden;
+  background: #FAE9E1 none;
+  aspect-ratio: 16 / 9;
+  max-height: min(82vh, 760px);
+}
+
+.hc-faixa {
+  position: absolute;
+  inset: 0;
+}
+
+.hc-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .7s ease, visibility 0s .7s;
+}
+
+.hc-slide.ativo {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .7s ease, visibility 0s;
+}
+
+.hc-slide > img.hc-imagem {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* botão "Comprar agora" sobre a imagem */
+/* centralizado sem usar transform (o botão original anima o transform ao passar o mouse) */
+.hero-carrossel .hc-comprar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 58px;
+  z-index: 3;
+  width: max-content;
+  margin: 0 auto;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .3);
+}
+
+.hc-legenda .btn-comprar { margin: 8px 0 0; }
+
+/* ---------- plano B: capas dos produtos em destaque ---------- */
+
+.hc-fundo {
+  position: absolute;
+  inset: -30px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(26px) brightness(.78) saturate(1.1);
+}
+
+.hc-slide.hc-produto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 5vw, 72px);
+  padding: 28px clamp(20px, 6vw, 90px) 64px;
+}
+
+.hc-foto {
+  position: relative;
+  z-index: 1;
+  max-height: 100%;
+  max-width: 44%;
+  min-height: 0;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .45);
+}
+
+.hc-legenda {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 420px;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
+}
+
+.hc-selo {
+  padding: 5px 13px;
+  border-radius: 20px;
+  background: #B76E79;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.hc-legenda strong {
+  font-size: clamp(22px, 3.2vw, 42px);
+  line-height: 1.15;
+}
+
+.hc-preco {
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 700;
+}
+
+.hero-carrossel.modo-produtos .hc-comprar { display: none; }
+
+/* ---------- controles ---------- */
+
+.hc-seta {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 46px;
+  height: 46px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .88);
+  color: #2e2e2e;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, .25);
+}
+
+.hc-seta:hover { background: #fff; }
+.hc-seta.ant { left: 16px; }
+.hc-seta.prox { right: 16px; }
+
+.hc-controles {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  border-radius: 24px;
+  background: rgba(26, 26, 26, .55);
+}
+
+.hc-ponto {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hc-ponto[aria-current="true"] { background: #fff; }
+
+.hc-pausa {
+  width: 26px;
+  height: 26px;
+  margin-left: 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .9);
+  color: #2e2e2e;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.hc-seta:focus-visible,
+.hc-ponto:focus-visible,
+.hc-pausa:focus-visible,
+.hero-carrossel .btn-comprar:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #B76E79;
+}
+
+/* ---------- celular: banner em pé (9:16) ---------- */
+
+@media (max-width: 768px) {
+
+  .hero.hero-carrossel {
+    aspect-ratio: 9 / 16;
+    max-height: calc(100svh - 70px);
+  }
+
+  .hc-seta { width: 38px; height: 38px; font-size: 20px; }
+  .hc-seta.ant { left: 8px; }
+  .hc-seta.prox { right: 8px; }
+
+  .hero-carrossel .hc-comprar { bottom: 62px; }
+
+  .hc-slide.hc-produto {
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 16px;
+    padding: 24px 22px 70px;
+  }
+
+  .hc-foto {
+    max-width: 78%;
+    max-height: 56%;
+  }
+
+  .hc-legenda { align-items: center; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hc-slide, .hc-slide.ativo { transition: none; }
+}

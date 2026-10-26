@@ -1,0 +1,127 @@
+/* "Meus pedidos": usa a base do fluxo.css (body.fx) */
+
+.cp-pagina { max-width: 760px; }
+
+.cp-titulo { margin-bottom: 8px; }
+
+.cp-intro {
+  color: #555;
+  margin-bottom: 22px;
+}
+
+.cp-form { display: grid; gap: 16px; }
+
+.cp-form .fx-btn { margin-top: 4px; }
+
+.cp-resultado { margin-top: 28px; outline: none; }
+
+.cp-resumo {
+  color: #6b6b6b;
+  margin-bottom: 14px;
+}
+
+.cp-vazio {
+  padding: 18px 20px;
+  border: 1px solid #ecd9d4;
+  border-radius: 12px;
+  background: #FAE9E1;
+  color: #5a3a40;
+}
+
+/* ---------- cartão de pedido ---------- */
+
+.cp-pedido {
+  background: #fff;
+  border: 1px solid #ecd9d4;
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+}
+
+.cp-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 12px;
+}
+
+.cp-topo h2 {
+  color: #B76E79;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.cp-data { color: #6b6b6b; font-size: 13px; }
+
+.cp-selo {
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: #F7D9D3;
+  color: #8A4A54;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cp-selo.ok { background: #dff1e6; color: #1f6a3e; }
+.cp-selo.erro { background: #fdecea; color: #8c1d18; }
+
+.cp-itens {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  border-top: 1px solid #f0e2dd;
+}
+
+.cp-itens li {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid #f0e2dd;
+}
+
+.cp-item-nome { overflow-wrap: anywhere; }
+.cp-item-nome small { display: block; color: #6b6b6b; font-size: 13px; }
+.cp-item-preco { white-space: nowrap; color: #8A4A54; font-weight: 600; }
+
+.cp-valores { margin-top: 6px; }
+
+.cp-rastreio {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #d9bfc3;
+  font-size: 14px;
+}
+
+.cp-rastreio a { color: #8A4A54; font-weight: 600; }
+
+@media (max-width: 560px) {
+  .cp-pedido { padding: 16px; }
+}
+
+/* ---------- andamento dentro do pedido ---------- */
+
+.cp-andamento {
+  margin: 4px 0 14px;
+  padding: 12px 14px;
+  border: 1px solid #f0e2dd;
+  border-radius: 12px;
+  background: #fdf7f4;
+}
+
+.cp-andamento summary {
+  cursor: pointer;
+  color: #8A4A54;
+  font-weight: 700;
+}
+
+.cp-andamento summary:focus-visible {
+  outline: 3px solid #B76E79;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.cp-andamento .pr-passos { margin-top: 14px; }

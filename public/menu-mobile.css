@@ -1,0 +1,198 @@
+/* ==========================================================
+   Cabeçalho no celular: menu sanduíche + carrinho flutuante.
+   Carregue DEPOIS do style.css / fluxo.css. Funciona junto
+   com o menu-mobile.js.
+   ========================================================== */
+
+/* Botão do carrinho vira link/botão com ícone (o ícone só aparece no celular) */
+a.btn-carrinho { display: inline-block; text-decoration: none; }
+
+.btn-carrinho-texto { margin-right: .4em; }
+.btn-carrinho-icone { display: none; }
+
+.menu-toggle { display: none; }
+
+@media (max-width: 768px) {
+
+  /* ---------- cabeçalho enxuto ---------- */
+
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: .55rem 1rem;
+  }
+
+  header .logo h1 { font-size: 1.45rem; line-height: 1.1; }
+  header .logo span { font-size: .75rem; }
+  header .logoimg { height: 42px; width: 42px; margin-right: .6rem; }
+
+  /* ---------- botão sanduíche ---------- */
+
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: 1px solid #B76E79;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .menu-toggle:focus-visible,
+  header .btn-carrinho:focus-visible,
+  header nav a:focus-visible {
+    outline: 3px solid #B76E79;
+    outline-offset: 2px;
+  }
+
+  .menu-toggle-barras,
+  .menu-toggle-barras::before,
+  .menu-toggle-barras::after {
+    display: block;
+    width: 22px;
+    height: 2.5px;
+    border-radius: 2px;
+    background: #8A4A54;
+    transition: transform .25s, background .25s, opacity .2s;
+  }
+
+  .menu-toggle-barras { position: relative; }
+
+  .menu-toggle-barras::before,
+  .menu-toggle-barras::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-toggle-barras::before { top: -7px; }
+  .menu-toggle-barras::after { top: 7px; }
+
+  .menu-aberto .menu-toggle-barras { background: transparent; }
+  .menu-aberto .menu-toggle-barras::before { transform: translateY(7px) rotate(45deg); }
+  .menu-aberto .menu-toggle-barras::after { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---------- menu em painel ---------- */
+
+  header nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 6px 0 10px;
+    background: #fefefe;
+    border-bottom: 1px solid #B76E79;
+    box-shadow: 0 14px 22px rgba(0, 0, 0, .12);
+    font-size: 1.1rem;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity .2s, transform .2s, visibility 0s .2s;
+  }
+
+  .menu-aberto header nav,
+  header.menu-aberto nav {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: opacity .2s, transform .2s, visibility 0s;
+  }
+
+  header nav a {
+    padding: 15px 24px;
+    border-bottom: 1px solid #f3e6e2;
+  }
+
+  header nav a:last-child { border-bottom: 0; }
+
+  header nav a[aria-current="page"] { color: #B76E79; }
+
+  /* ---------- carrinho flutuante ---------- */
+
+  body header .btn-carrinho.btn-carrinho {
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #B76E79;
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(138, 74, 84, .45);
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .2s, background .2s;
+  }
+
+  body header .btn-carrinho.btn-carrinho:hover { background: #A05A65; opacity: 1; }
+  body header .btn-carrinho.btn-carrinho:active { transform: scale(.94); }
+
+  .btn-carrinho-icone {
+    display: grid;
+    place-items: center;
+  }
+
+  .btn-carrinho-icone svg { width: 28px; height: 28px; }
+
+  /* o texto continua para leitores de tela, só some da vista */
+  .btn-carrinho-texto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .btn-carrinho #contadorCarrinho {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    display: grid;
+    place-items: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+    border: 2px solid #B76E79;
+    border-radius: 12px;
+    background: #fff;
+    color: #8A4A54;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .btn-carrinho.vazio #contadorCarrinho { display: none; }
+
+  /* na própria página do carrinho o botão não faz sentido */
+  .btn-carrinho.na-pagina-do-carrinho { display: none !important; }
+
+  /* o aviso "Adicionado ao carrinho" sobe para não ficar embaixo do botão */
+  .fx-toast { bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle-barras,
+  .menu-toggle-barras::before,
+  .menu-toggle-barras::after,
+  header nav,
+  .btn-carrinho { transition: none !important; }
+}

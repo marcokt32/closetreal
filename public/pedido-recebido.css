@@ -1,0 +1,136 @@
+/* Página "pedido recebido" (cliente). Usa a base do fluxo.css. */
+
+.pr-carregando { text-align: center; padding: 60px 0; }
+
+/* ---------- cartão de situação ---------- */
+
+.pr-situacao {
+  text-align: center;
+  padding: 34px 24px 28px;
+}
+
+.pr-icone {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #F7D9D3;
+  color: #8A4A54;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.pr-situacao.ok .pr-icone { background: #dff1e6; color: #2f7d4f; }
+.pr-situacao.erro .pr-icone { background: #fdecea; color: #B3261E; }
+
+.pr-situacao h1 {
+  color: #B76E79;
+  font-size: 30px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.pr-situacao.ok h1 { color: #2f7d4f; }
+.pr-situacao.erro h1 { color: #B3261E; }
+
+.pr-situacao > p {
+  max-width: 520px;
+  margin: 0 auto;
+  color: #4a4a4a;
+}
+
+.pr-giro {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #e8c9cd;
+  border-top-color: #B76E79;
+  border-radius: 50%;
+  animation: pr-gira 1s linear infinite;
+}
+
+@keyframes pr-gira { to { transform: rotate(360deg); } }
+
+/* número do pedido */
+.pr-numero {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px 14px 10px 18px;
+  border: 1px dashed #B76E79;
+  border-radius: 12px;
+  background: #fdf7f4;
+}
+
+.pr-numero span { color: #6b6b6b; font-size: 14px; }
+.pr-numero strong { color: #8A4A54; font-size: 22px; letter-spacing: .02em; }
+
+.pr-copiar {
+  padding: 7px 12px;
+  border: 1px solid #B76E79;
+  border-radius: 8px;
+  background: #fff;
+  color: #8A4A54;
+  font: 600 13px/1 'Segoe UI', sans-serif;
+  cursor: pointer;
+}
+
+.pr-copiar:hover { background: #F7D9D3; }
+
+.pr-dica {
+  margin-top: 12px;
+  color: #6b6b6b;
+  font-size: 13px;
+}
+
+.pr-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.pr-acoes .fx-btn {
+  display: inline-block;
+  width: auto;
+  margin: 0;
+  padding: 13px 24px;
+}
+
+/* ---------- entrega e itens ---------- */
+
+.pr-endereco { font-style: normal; color: #3a3a3a; line-height: 1.55; }
+
+.pr-rastreio {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0e2dd;
+}
+
+.pr-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(183, 110, 121, .25);
+}
+
+.pr-item:last-of-type { border-bottom: 0; }
+
+.pr-item-nome { font-weight: 600; color: #2e2e2e; overflow-wrap: anywhere; }
+.pr-item-det { grid-column: 1; color: #6b6b6b; font-size: 13px; }
+.pr-item-preco { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-weight: 600; color: #8A4A54; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .pr-situacao h1 { font-size: 25px; }
+  .fx-resumo { position: static; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-giro { animation: none; }
+}

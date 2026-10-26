@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contato | Closet Real</title>
+    <meta name="description" content="Fale com a Closet Real: e-mail, WhatsApp, horário de atendimento e endereço.">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="fluxo.css">
+    <link rel="stylesheet" href="paginas.css">
+    <link rel="stylesheet" href="menu-mobile.css">
+</head>
+
+<body class="fx">
+
+    <header>
+        <a class="fx-logo-link" href="/">
+            <div class="logo">
+                <img src="./img/Logo CR fundo transparente.png" alt="logo closet real" class="logoimg">
+                <div>
+                    <h1>Closet Real</h1>
+                    <span>Moda Feminina</span>
+                </div>
+            </div>
+        </a>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/?colecao=novidades#vitrine">Novidades</a>
+            <a href="/?colecao=promocoes#vitrine">Promoções</a>
+            <a href="/contato.html" aria-current="page">Contato</a>
+            <a href="./consultar.html">Meus pedidos</a>
+        </nav>
+
+        <a class="btn-carrinho" href="/carrinho.html">
+            🛒 Carrinho
+            <span id="contadorCarrinho">0</span>
+        </a>
+    </header>
+
+    <main class="fx-pagina lp-pagina">
+
+        <h1>Contato</h1>
+        <p class="lp-atualizado">Fale com a gente. Vamos ter prazer em ajudar.</p>
+
+        <div class="lp-contatos">
+
+            <section class="lp-contato" data-loja-mostrar="email">
+                <h2>E-mail</h2>
+                <p><a data-loja-href="email"><span data-loja="email"></span></a></p>
+                <p>Para trocas, devoluções, dúvidas sobre pedidos e privacidade.</p>
+            </section>
+
+            <section class="lp-contato" data-loja-mostrar="whatsapp">
+                <h2>WhatsApp</h2>
+                <p>Atendimento rápido para tirar dúvidas.</p>
+                <a class="fx-btn" data-loja-href="whatsapp">Conversar no WhatsApp</a>
+            </section>
+
+            <section class="lp-contato" data-loja-mostrar="telefone">
+                <h2>Telefone</h2>
+                <p><a data-loja-href="telefone"><span data-loja="telefone"></span></a></p>
+            </section>
+
+            <section class="lp-contato" data-loja-mostrar="instagram">
+                <h2>Instagram</h2>
+                <p><a data-loja-href="instagram">@<span data-loja="instagram"></span></a></p>
+            </section>
+
+            <section class="lp-contato">
+                <h2>Horário de atendimento</h2>
+                <p data-loja="horario">Segunda a Sexta</p>
+            </section>
+
+            <section class="lp-contato" data-loja-mostrar="endereco">
+                <h2>Endereço</h2>
+                <p data-loja="endereco"></p>
+                <p data-loja-mostrar="documento"><span data-loja="tipoDocumento"></span>: <span data-loja="documento"></span></p>
+            </section>
+
+        </div>
+
+        <section class="lp-secao">
+            <h2>Antes de nos chamar</h2>
+            <p>Estes atalhos podem resolver na hora:</p>
+            <div class="lp-atalhos">
+                <a href="/consultar.html">Acompanhar meu pedido</a>
+                <a href="/trocas-e-devolucoes.html">Trocas e devoluções</a>
+                <a href="/privacidade.html">Política de privacidade</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div>
+            <h3>Closet Real</h3>
+            <p>Loja especializada em moda feminina.</p>
+        </div>
+        <div>
+            <h3>Pagamento Seguro</h3>
+            <p>Processado por Mercado Pago.</p>
+        </div>
+        <div>
+            <h3>Atendimento</h3>
+            <p>Segunda a Sexta</p>
+        </div>
+    </footer>
+
+    <script src="loja-carrinho.js"></script>
+    <script src="menu-mobile.js"></script>
+    <script src="rodape.js"></script>
+    <script src="aparencia.js"></script>
+    <script>atualizarContador();</script>
+
+</body>
+
+</html>

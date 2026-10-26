@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aparência | Administração</title>
+    <link rel="stylesheet" href="fluxo.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin-aparencia.css">
+</head>
+
+<body class="fx adm">
+
+    <header class="adm-topo">
+        <strong class="adm-marca">Closet Real <span>Admin</span></strong>
+        <nav class="adm-menu">
+            <a href="/pedidos.html">Pedidos</a>
+            <a href="/admin-produtos.html">Produtos</a>
+            <a href="/aparencia-admin.html" aria-current="page">Aparência</a>
+            <a href="/sistema-admin.html">Sistema</a>
+            <a href="/" target="_blank" rel="noopener">Ver loja ↗</a>
+            <button type="button" class="fx-link" id="btnSair">Sair</button>
+        </nav>
+    </header>
+
+    <main class="adm-pagina ap-pagina">
+
+        <div class="adm-barra">
+            <h1 class="fx-titulo">Aparência da loja</h1>
+        </div>
+
+        <p class="fx-sub ap-intro">
+            Escolha o banner, o logo, as cores e as fontes da loja. Nada muda para os clientes até você clicar em
+            <strong>Salvar aparência</strong>.
+        </p>
+
+        <!-- ================= BANNER ================= -->
+
+        <section class="fx-card ap-bloco" aria-labelledby="tituloBanner">
+            <h2 id="tituloBanner">Banner da página inicial</h2>
+            <p class="fx-sub">
+                Envie imagens separadas para o <strong>computador</strong> e para o <strong>celular</strong>.
+                Com mais de uma imagem, o banner vira um carrossel (troca sozinho e o cliente também pode passar manualmente).
+            </p>
+
+            <div class="ap-dois">
+
+                <div class="ap-banner" id="areaBannerPc">
+                    <div class="ap-banner-topo">
+                        <h3>💻 Computador <span class="ap-medida">horizontal 16:9</span></h3>
+                        <label class="fx-btn fx-btn-sec ap-enviar">
+                            ＋ Enviar imagem
+                            <input type="file" accept="image/jpeg,image/png,image/webp" multiple id="arqBannerPc" hidden>
+                        </label>
+                    </div>
+                    <p class="fx-sub">Ideal: 1920 × 1080 px.</p>
+                    <div class="ap-lista" id="listaBannerPc"></div>
+                </div>
+
+                <div class="ap-banner" id="areaBannerCelular">
+                    <div class="ap-banner-topo">
+                        <h3>📱 Celular <span class="ap-medida">vertical 9:16</span></h3>
+                        <label class="fx-btn fx-btn-sec ap-enviar">
+                            ＋ Enviar imagem
+                            <input type="file" accept="image/jpeg,image/png,image/webp" multiple id="arqBannerCelular" hidden>
+                        </label>
+                    </div>
+                    <p class="fx-sub">Ideal: 1080 × 1920 px.</p>
+                    <div class="ap-lista ap-lista-vertical" id="listaBannerCelular"></div>
+                </div>
+
+            </div>
+
+            <div class="ap-linha" id="blocoIntervalo">
+                <label for="intervalo">Trocar de imagem a cada</label>
+                <select id="intervalo">
+                    <option value="3">3 segundos</option>
+                    <option value="4">4 segundos</option>
+                    <option value="5">5 segundos</option>
+                    <option value="6">6 segundos</option>
+                    <option value="8">8 segundos</option>
+                    <option value="10">10 segundos</option>
+                    <option value="15">15 segundos</option>
+                </select>
+            </div>
+
+            <p class="ap-dica" id="dicaBanner"></p>
+        </section>
+
+        <!-- ================= LOGO ================= -->
+
+        <section class="fx-card ap-bloco" aria-labelledby="tituloLogo">
+            <h2 id="tituloLogo">Logo</h2>
+            <p class="fx-sub">Aparece no topo de todas as páginas. PNG com fundo transparente fica melhor.</p>
+
+            <div class="ap-logo">
+                <div class="ap-logo-previa" id="previaLogo" aria-live="polite"></div>
+                <div class="ap-logo-acoes">
+                    <label class="fx-btn fx-btn-sec ap-enviar">
+                        ＋ Enviar logo
+                        <input type="file" accept="image/jpeg,image/png,image/webp" id="arqLogo" hidden>
+                    </label>
+                    <button type="button" class="fx-link" id="btnRemoverLogo">Remover e voltar ao logo padrão</button>
+                    <label class="adm-check ap-check">
+                        <input type="checkbox" id="mostrarNome">
+                        <span>Mostrar o nome "Closet Real" ao lado do logo</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CORES ================= -->
+
+        <section class="fx-card ap-bloco" aria-labelledby="tituloCores">
+            <h2 id="tituloCores">Cores</h2>
+            <p class="fx-sub">
+                Escolha a cor principal e o site monta sozinho os tons de apoio (fundos, bordas, textos), sempre combinando.
+                Vermelho de erro, verde de sucesso e cinzas não mudam.
+            </p>
+
+            <div class="ap-presets" id="presetsCores" role="group" aria-label="Combinações prontas"></div>
+
+            <div class="ap-linha">
+                <label for="corPrimaria">Ou escolha a sua cor principal</label>
+                <input type="color" id="corPrimaria" value="#b76e79">
+                <input type="text" id="corTexto" maxlength="7" class="ap-hex" aria-label="Código da cor (hexadecimal)" placeholder="#B76E79" spellcheck="false">
+            </div>
+
+            <p class="ap-dica" id="avisoCor" role="status"></p>
+
+            <div class="ap-previa" id="previaTema" aria-label="Prévia do tema">
+                <div class="ap-previa-topo"><strong>Closet Real</strong><span>Início · Novidades · Promoções</span></div>
+                <div class="ap-previa-corpo">
+                    <div class="ap-previa-card">
+                        <span class="ap-previa-tag">🏷 33% OFF</span>
+                        <strong>Vestido Linho</strong>
+                        <span class="ap-previa-preco">R$ 89,90</span>
+                        <button type="button" tabindex="-1">Adicionar ao Carrinho</button>
+                    </div>
+                    <div class="ap-previa-caixa">
+                        <strong>Resumo do pedido</strong>
+                        <span>Frete e total em destaque</span>
+                        <a href="#" tabindex="-1" onclick="return false">Acompanhar pedido</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FONTES ================= -->
+
+        <section class="fx-card ap-bloco" aria-labelledby="tituloFontes">
+            <h2 id="tituloFontes">Fontes</h2>
+            <p class="fx-sub">As fontes ficam guardadas na própria loja (nada é carregado de sites externos).</p>
+
+            <div class="ap-dois">
+                <div class="fx-campo">
+                    <label for="fonteTitulos">Títulos</label>
+                    <select id="fonteTitulos"></select>
+                    <p class="ap-amostra-titulo" id="amostraTitulo">Moda feminina com estilo</p>
+                </div>
+                <div class="fx-campo">
+                    <label for="fonteTexto">Textos e botões</label>
+                    <select id="fonteTexto"></select>
+                    <p class="ap-amostra-texto" id="amostraTexto">Peças selecionadas com carinho para o seu dia a dia, em vários tamanhos e cores.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="ap-barra-salvar" role="region" aria-label="Salvar alterações">
+        <span id="estadoSalvar" class="ap-estado" role="status">Nenhuma alteração</span>
+        <button type="button" class="fx-btn fx-btn-sec" id="btnPadrao">Restaurar cores e fontes padrão</button>
+        <button type="button" class="fx-btn" id="btnSalvar" disabled>Salvar aparência</button>
+    </div>
+
+    <script src="admin-comum.js"></script>
+    <script src="tema-cores.js"></script>
+    <script src="admin-aparencia.js"></script>
+
+</body>
+
+</html>

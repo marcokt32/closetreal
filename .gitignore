@@ -1,0 +1,32 @@
+# Segredos e ambiente
+.env
+.env.*
+!.env.example
+
+# Dependências
+node_modules/
+
+# Banco de dados (contém dados de clientes)
+*.db
+*.db-journal
+
+# Fotos enviadas pelo painel (são conteúdo da loja: faça backup, não versione)
+public/uploads/
+
+# Cópias de segurança (têm dados de clientes)
+backups/
+*.antes-da-restauracao-*
+
+# Anotações internas (têm credenciais de teste)
+notas.txt
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Chaves, logs e arquivos auxiliares do SQLite
+*.key
+*.pem
+*.log
+*.db-wal
+*.db-shm

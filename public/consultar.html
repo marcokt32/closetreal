@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex">
+    <title>Meus pedidos | Closet Real</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="fluxo.css">
+    <link rel="stylesheet" href="andamento.css">
+    <link rel="stylesheet" href="consultar.css">
+    <link rel="stylesheet" href="menu-mobile.css">
+</head>
+
+<body class="fx">
+
+    <header>
+        <a class="fx-logo-link" href="/">
+            <div class="logo">
+                <img src="./img/Logo CR fundo transparente.png" alt="logo closet real" class="logoimg">
+                <div>
+                    <h1>Closet Real</h1>
+                    <span>Moda Feminina</span>
+                </div>
+            </div>
+        </a>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/?colecao=novidades#vitrine">Novidades</a>
+            <a href="/?colecao=promocoes#vitrine">Promoções</a>
+            <a href="/contato.html">Contato</a>
+            <a href="./consultar.html" aria-current="page">Meus pedidos</a>
+        </nav>
+
+        <a class="btn-carrinho" href="/carrinho.html">
+            🛒 Carrinho
+            <span id="contadorCarrinho">0</span>
+        </a>
+    </header>
+
+    <main class="fx-pagina cp-pagina">
+
+        <h1 class="fx-titulo cp-titulo">Meus pedidos</h1>
+
+        <p class="cp-intro">
+            Informe o <strong>e-mail</strong> ou o <strong>telefone</strong> usado na compra para ver
+            os seus pedidos dos últimos 3 meses.
+        </p>
+
+        <form id="formConsulta" class="fx-card cp-form" novalidate>
+
+            <div class="fx-campo">
+                <label for="contato">E-mail ou telefone</label>
+                <input id="contato" name="contato" type="text" autocomplete="email" autocapitalize="none"
+                    spellcheck="false" placeholder="seuemail@exemplo.com ou (21) 99999-9999">
+            </div>
+
+            <div class="fx-campo">
+                <label for="pedido">Número do pedido <span class="fx-sub">(opcional)</span></label>
+                <input id="pedido" name="pedido" type="text" inputmode="numeric" autocomplete="off" placeholder="Ex.: 18">
+                <span class="fx-sub">Se a compra foi há mais de 3 meses, informe o número para encontrá-la.</span>
+            </div>
+
+            <div id="avisoConsulta" class="fx-aviso" role="alert"></div>
+
+            <button type="submit" class="fx-btn" id="btnConsultar">Consultar pedidos</button>
+
+        </form>
+
+        <section id="resultado" class="cp-resultado" aria-live="polite" tabindex="-1"></section>
+
+    </main>
+
+    <footer>
+        <div>
+            <h3>Closet Real</h3>
+            <p>Loja especializada em moda feminina.</p>
+        </div>
+        <div>
+            <h3>Pagamento Seguro</h3>
+            <p>Processado por Mercado Pago.</p>
+        </div>
+        <div>
+            <h3>Atendimento</h3>
+            <p>Segunda a Sexta</p>
+        </div>
+    </footer>
+
+    <script src="loja-carrinho.js"></script>
+    <script src="menu-mobile.js"></script>
+    <script src="rodape.js"></script>
+    <script src="aparencia.js"></script>
+    <script src="andamento.js"></script>
+    <script src="consultar.js"></script>
+
+</body>
+
+</html>

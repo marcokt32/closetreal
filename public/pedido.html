@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido | Administração</title>
+    <link rel="stylesheet" href="fluxo.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin-pedidos.css">
+    <link rel="stylesheet" href="etiqueta-visor.css">
+</head>
+
+<body class="fx adm">
+
+    <header class="adm-topo">
+        <strong class="adm-marca">Closet Real <span>Admin</span></strong>
+        <nav class="adm-menu">
+            <a href="/pedidos.html" aria-current="page">Pedidos</a>
+            <a href="/admin-produtos.html">Produtos</a>
+            <a href="/aparencia-admin.html">Aparência</a>
+            <a href="/sistema-admin.html">Sistema</a>
+            <a href="/" target="_blank" rel="noopener">Ver loja ↗</a>
+            <button type="button" class="fx-link" id="btnSair">Sair</button>
+        </nav>
+    </header>
+
+    <main class="adm-pagina">
+
+        <a class="fx-link" href="/pedidos.html">← Voltar para pedidos</a>
+
+        <div id="erroPedido" class="fx-aviso" role="alert"></div>
+
+        <div id="dadosPedido"></div>
+
+    </main>
+
+    <script src="admin-comum.js"></script>
+    <script src="pedido.js"></script>
+
+</body>
+
+</html>

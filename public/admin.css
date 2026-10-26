@@ -1,0 +1,264 @@
+/* Base das páginas de administração — usa as cores e componentes do fluxo.css */
+
+/* Mesma base do style.css da loja (zera margens e usa border-box).
+   :where() mantém a prioridade zero, e o <dialog> fica de fora para continuar centralizado. */
+:where(body.adm, body.adm *:not(dialog), body.adm *::before, body.adm *::after) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.adm {
+  background: #fbf6f4;
+  min-height: 100vh;
+}
+
+.adm-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 14px 24px;
+  background: #fff;
+  border-bottom: 1px solid #B76E79;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.adm-marca {
+  color: #B76E79;
+  font-size: 20px;
+}
+
+.adm-marca span {
+  color: #6b6b6b;
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.adm-menu {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.adm-menu a {
+  color: #4a4a4a;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.adm-menu a:hover,
+.adm-menu a[aria-current="page"] {
+  color: #8A4A54;
+  border-bottom-color: #B76E79;
+}
+
+.adm-pagina {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 80px;
+}
+
+.adm-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.fx .adm-novo {
+  width: auto;
+  padding: 12px 22px;
+}
+
+.adm-filtros {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.adm-filtros input,
+.adm-filtros select {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #d6bfbb;
+  border-radius: 10px;
+  font: inherit;
+  background: #fff;
+  color: #2e2e2e;
+}
+
+.adm-filtros input {
+  flex: 1 1 260px;
+  max-width: 420px;
+}
+
+.adm-filtros input:focus,
+.adm-filtros select:focus {
+  outline: none;
+  border-color: #B76E79;
+  box-shadow: 0 0 0 3px rgba(183, 110, 121, .25);
+}
+
+.adm-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: #F7D9D3;
+  color: #7a4a52;
+  margin-right: 6px;
+}
+
+.adm-tag.erro {
+  background: #fdecea;
+  color: #8c1d18;
+}
+
+.adm-vazio {
+  text-align: center;
+  color: #6b6b6b;
+  padding: 40px 16px;
+}
+
+/* Esta página não carrega o style.css da loja: define a fonte aqui */
+body.adm,
+body.adm input,
+body.adm select,
+body.adm textarea,
+body.adm button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------- etiquetas de situação do pedido ---------- */
+
+.adm-badge {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.adm-badge.aguardando { background: #f3ece9; color: #6b4f4a; }
+.adm-badge.pago { background: #e0f2e6; color: #17603a; }
+.adm-badge.separacao { background: #fdf1d6; color: #7a5200; }
+.adm-badge.transito { background: #e2edfb; color: #1d4f91; }
+.adm-badge.entregue { background: #cfe9d8; color: #14532d; }
+.adm-badge.cancelado { background: #fdecea; color: #8c1d18; }
+
+/* ---------- botões de filtro (pílulas) ---------- */
+
+.adm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.adm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid #d6bfbb;
+  background: #fff;
+  color: #4a4a4a;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.adm-chip:hover {
+  border-color: #B76E79;
+  background: #FAE9E1;
+}
+
+.adm-chip[aria-pressed="true"] {
+  background: #A05A65;
+  border-color: #A05A65;
+  color: #fff;
+}
+
+.adm-chip b {
+  font-weight: 700;
+  opacity: .85;
+}
+
+/* ---------- login ---------- */
+
+body.adm-login-pagina {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.adm-login {
+  width: min(400px, 100%);
+  background: #fff;
+  border: 1px solid #B76E79;
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 0 20px rgba(183, 110, 121, .2);
+}
+
+.adm-login .adm-marca {
+  display: block;
+  text-align: center;
+  font-size: 26px;
+}
+
+.adm-login h1 {
+  color: #8A4A54;
+  font-size: 18px;
+  text-align: center;
+  margin: 6px 0 22px;
+  font-weight: 600;
+}
+
+.adm-login .fx-campo {
+  margin-bottom: 16px;
+}
+
+.adm-login .fx-btn {
+  margin-top: 4px;
+}
+
+@media (max-width: 720px) {
+  .adm-topo {
+    padding: 12px 16px;
+  }
+}
+
+/* ---------- ID do produto ---------- */
+
+.adm-id {
+  display: inline-block;
+  font-family: ui-monospace, Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  color: #5b3a3f;
+  background: #f3ece9;
+  padding: 1px 7px;
+  border-radius: 6px;
+  margin-right: 6px;
+  user-select: all; /* um clique seleciona o ID inteiro, pronto para copiar */
+}
+
+.adm-tag.alerta {
+  background: #fff1c9;
+  color: #7a5200;
+}

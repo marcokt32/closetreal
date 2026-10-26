@@ -12,7 +12,6 @@ module.exports = {
             max_memory_restart: "400M",
             kill_timeout: 12000,       // dá tempo do servidor fechar o banco antes do pm2 forçar
             time: true,                // data e hora nos logs
-            env: { NODE_ENV: "production" }
         }
     ]
 };

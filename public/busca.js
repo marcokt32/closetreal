@@ -15,7 +15,7 @@
     { label: "Jaquetas e casacos", valor: "jaqueta", chaves: ["jaqueta", "casaco", "blazer"] }
   ];
 
-  const campo = document.getElementById("campoBusca");
+  const campo = document.getElementById("campoBuscaHeader");
   const lista = document.getElementById("sugestoesBusca");
   if (!campo || !lista) return;
   const form = campo.form;
@@ -69,7 +69,7 @@
   function ir(termo) {
     const t = String(termo || "").trim();
     if (!t) return;
-    location.href = "/?busca=" + encodeURIComponent(t) + "#vitrine";
+    location.href = "/?q=" + encodeURIComponent(t) + "#vitrine";
   }
 
   campo.addEventListener("focus", desenhar);
@@ -88,41 +88,7 @@
 
   document.addEventListener("click", e => { if (!form.contains(e.target)) abrir(false); });
 
-  // ---- aplicar a busca na vitrine (quando a página abre com ?busca=...) ----
-  const termo = new URLSearchParams(location.search).get("busca");
-  const catalogo = document.getElementById("catalogo");
-  if (!termo || !catalogo) return;
-
-  campo.value = termo;
-  const q = norm(termo);
-  const conhecido = TERMOS.find(t => t.valor === q || norm(t.label) === q);
-  const chaves = conhecido ? conhecido.chaves : [q];
-
-  const titulo = document.getElementById("tituloCatalogo");
-  const sub = document.getElementById("subtituloCatalogo");
-  if (titulo) titulo.textContent = "Resultados para “" + termo + "”";
-  if (sub) sub.textContent = "";
-
-  function filtrar() {
-    let vistos = 0;
-    catalogo.querySelectorAll(".produto").forEach(card => {
-      const txt = norm(card.textContent);
-      const ok = chaves.some(c => txt.includes(c));
-      card.style.display = ok ? "" : "none";
-      if (ok) vistos++;
-    });
-    let aviso = catalogo.querySelector(".sem-resultados");
-    const temCards = catalogo.querySelector(".produto");
-    if (temCards && !vistos) {
-      if (!aviso) {
-        aviso = document.createElement("p");
-        aviso.className = "sem-resultados";
-        aviso.textContent = "Nenhum produto encontrado para esta busca.";
-        catalogo.appendChild(aviso);
-      }
-    } else if (aviso) aviso.remove();
-  }
-
-  new MutationObserver(filtrar).observe(catalogo, { childList: true });
-  filtrar();
+  // O filtro da vitrine é feito pelo produtos.js (parâmetro ?q=). Aqui só preenchemos o campo.
+  const q = new URLSearchParams(location.search).get("q");
+  if (q) campo.value = q;
 })();

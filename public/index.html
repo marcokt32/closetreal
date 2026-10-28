@@ -6,21 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Closet Real</title>
 
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
     <link rel="stylesheet" href="menu-mobile.css">
     <link rel="stylesheet" href="aparencia.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <header>
-        <div class="logo">
+        <a href="/" class="logo" aria-label="Closet Real - ir para a página inicial">
             <img src="./img/Logo CR fundo transparente.png" alt="logo closet real" class="logoimg">
             <div>
                 <h1>Closet Real</h1>
                 <span>Moda Feminina</span>
             </div>
-        </div>
+        </a>
 
         <nav>
             <a href="/">Início</a>
@@ -29,6 +32,14 @@
             <a href="/contato.html">Contato</a>
             <a href="./consultar.html">Meus pedidos</a>
         </nav>
+
+        <form class="busca-header" role="search" action="/" method="get" autocomplete="off">
+            <input type="search" id="campoBusca" name="busca" placeholder="Buscar produtos"
+                aria-label="Buscar produtos" role="combobox" aria-autocomplete="list"
+                aria-controls="sugestoesBusca" aria-expanded="false">
+            <button type="submit" aria-label="Pesquisar">🔍</button>
+            <ul id="sugestoesBusca" role="listbox" hidden></ul>
+        </form>
 
         <button class="btn-carrinho" onclick="verCarrinho()">
             🛒 Carrinho
@@ -104,6 +115,7 @@
     <script src="aparencia.js"></script>
     <script src="produto-modal.js"></script>
     <script src="produtos.js"></script>
+    <script src="busca.js"></script>
 
 </body>
 

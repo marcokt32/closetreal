@@ -19,7 +19,6 @@ body {
 
 header {
   background: #fefefe;
-  border-bottom: 1px solid #B76E79;
 
   display: flex;
   justify-content: space-between;
@@ -35,11 +34,24 @@ header {
 .logo {
   display: flex;
   flex-direction: row;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .logo h1 {
   color: #B76E79;
   font-size: 2rem;
+  font-family: var(--fonte-titulo, inherit);
+}
+
+/* fonte escolhida para o título: <html data-fonte-titulo="parisienne"> */
+html[data-fonte-titulo="parisienne"] .logo h1 {
+  --fonte-titulo: 'Parisienne', cursive;
+  font-family: 'Parisienne', cursive;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 1.1;
 }
 
 .logo span {
@@ -54,7 +66,7 @@ header {
 }
 
 nav {
-  font-size: 1.2rem;
+  font-size: 1rem;
   display: flex;
   gap: 30px;
 }
@@ -68,6 +80,84 @@ nav a {
 
 nav a:hover {
   color: #B76E79;
+}
+
+/* BUSCA */
+
+.busca-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 230px;
+}
+
+.busca-header input {
+  width: 100%;
+  padding: 9px 38px 9px 14px;
+  border: 1px solid #B76E79;
+  border-radius: 20px;
+  background: #fefefe;
+  color: #2e2e2e;
+  font-size: 1rem;
+}
+
+.busca-header input:focus-visible {
+  outline: 2px solid #B76E79;
+  outline-offset: 2px;
+}
+
+.busca-header button {
+  position: absolute;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+#sugestoesBusca {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 6px 0;
+  background: #fefefe;
+  border: 1px solid #F7D9D3;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(183, 110, 121, .25);
+}
+
+#sugestoesBusca[hidden] { display: none; }
+
+#sugestoesBusca .sug-titulo {
+  padding: 6px 14px;
+  font-size: .8rem;
+  color: #888;
+}
+
+#sugestoesBusca li[role="option"] {
+  padding: 9px 14px;
+  color: #2e2e2e;
+  cursor: pointer;
+}
+
+#sugestoesBusca li[role="option"]:hover,
+#sugestoesBusca li[role="option"][aria-selected="true"] {
+  background: #FAE9E1;
+  color: #B76E79;
+}
+
+.sem-resultados {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #1a1a1a;
+  padding: 2rem 0;
 }
 
 /* CARRINHO */
@@ -813,6 +903,11 @@ footer p {
   nav {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .busca-header {
+    width: 100%;
+    max-width: 320px;
   }
 
   .hero h2 {

@@ -116,6 +116,9 @@ async function carregarResumo() {
 function limparFrete() {
     freteSelecionado = null;
     $("frete").replaceChildren();
+    $("frete").classList.remove("escolhido");
+    const alterar = $("freteAlterar");
+    if (alterar) alterar.remove();
     aviso("avisoFrete", "");
     atualizarTotal();
 }
@@ -188,6 +191,7 @@ async function calcularFrete() {
                 freteSelecionado = opcao;
                 aviso("avisoPagar", "");
                 atualizarTotal();
+                recolherFrete(divFrete);
             });
 
             const nome = el("span", "fx-opcao-nome", opcao.nome);
@@ -210,6 +214,41 @@ async function calcularFrete() {
         botao.disabled = false;
         botao.textContent = "Calcular frete";
     }
+}
+
+// Recolhe as opções não escolhidas e leva o olhar até o botão de pagar
+function recolherFrete(divFrete) {
+
+    divFrete.classList.add("escolhido");
+
+    if (!$("freteAlterar")) {
+        const caixa = el("div", "fx-frete-alterar");
+        caixa.id = "freteAlterar";
+
+        const botao = el("button", "fx-link", "Alterar frete");
+        botao.type = "button";
+        botao.addEventListener("click", () => {
+            divFrete.classList.remove("escolhido");
+            caixa.remove();
+        });
+
+        caixa.appendChild(botao);
+        divFrete.after(caixa);
+    }
+
+    const pagar = $("btnPagar");
+
+    pagar.classList.remove("fx-destaque");
+    void pagar.offsetWidth; // reinicia a animação se escolher de novo
+    pagar.classList.add("fx-destaque");
+
+    // só rola se o botão não estiver visível na tela (útil no celular)
+    setTimeout(() => {
+        const r = pagar.getBoundingClientRect();
+        if (r.top < 0 || r.bottom > window.innerHeight) {
+            pagar.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }, 250);
 }
 
 function atualizarTotal() {

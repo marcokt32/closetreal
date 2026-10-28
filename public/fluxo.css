@@ -513,6 +513,50 @@ body.fx {
   color: #8A4A54;
 }
 
+/* frete escolhido: as outras opções recolhem e o botão de pagar ganha destaque */
+
+.fx-opcoes {
+  transition: gap .35s ease;
+}
+
+.fx-opcao {
+  max-height: 200px;
+  overflow: hidden;
+  transition: border-color .2s, background .2s, max-height .35s ease,
+              opacity .25s ease, padding .35s ease, border-width .35s ease,
+              visibility 0s;
+}
+
+.fx-opcoes.escolhido {
+  gap: 0;
+}
+
+.fx-opcoes.escolhido .fx-opcao:not(.sel) {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+  visibility: hidden; /* tira do foco do teclado */
+  pointer-events: none;
+  transition: border-color .2s, background .2s, max-height .35s ease,
+              opacity .25s ease, padding .35s ease, border-width .35s ease,
+              visibility 0s .35s;
+}
+
+.fx-frete-alterar {
+  margin-top: 10px;
+}
+
+#btnPagar.fx-destaque {
+  animation: fx-pulso 1.2s ease-out 2;
+}
+
+@keyframes fx-pulso {
+  0%   { box-shadow: 0 0 0 0 rgba(183, 110, 121, .55); }
+  100% { box-shadow: 0 0 0 14px rgba(183, 110, 121, 0); }
+}
+
 /* ---------- mini resumo (checkout) ---------- */
 
 .fx-mini {
@@ -619,6 +663,10 @@ body.fx {
 @media (prefers-reduced-motion: reduce) {
   .fx *, .fx *::before, .fx *::after {
     transition: none !important;
+  }
+
+  #btnPagar.fx-destaque {
+    animation: none;
   }
 }
 

@@ -824,3 +824,47 @@ footer p {
   }
 
 }
+
+/* PAGINAÇÃO ("Ver mais") */
+
+.fx-mais {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.fx-mais p {
+  color: #1a1a1a;
+  margin-bottom: .75rem;
+}
+
+.fx-mais button {
+  background: #B76E79;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.fx-mais button:hover {
+  transform: translateY(-3px);
+}
+
+.fx-mais button:focus-visible {
+  outline: 3px solid #1a1a1a;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-mais button {
+    transition: none;
+  }
+
+  .fx-mais button:hover {
+    transform: none;
+  }
+}

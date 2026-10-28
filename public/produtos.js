@@ -421,7 +421,56 @@ function aplicarFiltro() {
         return;
     }
 
-    visiveis.forEach(produto => catalogo.appendChild(criarCard(produto)));
+    desenharPagina(catalogo, visiveis);
+}
+
+// ---------------------------------------------------------------
+// Paginação: mostra POR_PAGINA produtos e o botão "Ver mais"
+// ---------------------------------------------------------------
+
+const POR_PAGINA = 24;
+
+function desenharPagina(catalogo, visiveis) {
+
+    let mostrados = 0;
+
+    const rodape = el("div", "fx-mais");
+    const contagem = el("p");
+    contagem.setAttribute("role", "status");
+    contagem.setAttribute("aria-live", "polite");
+
+    const botao = el("button", null, "Ver mais produtos");
+    botao.type = "button";
+
+    rodape.append(contagem, botao);
+
+    const mostrarMais = (moverFoco) => {
+
+        const fim = Math.min(mostrados + POR_PAGINA, visiveis.length);
+        const novos = visiveis.slice(mostrados, fim).map(criarCard);
+
+        novos.forEach(card => catalogo.insertBefore(card, rodape));
+
+        mostrados = fim;
+
+        // Quando já está tudo na tela, o botão some e o foco vai para o 1º produto novo
+        if (mostrados >= visiveis.length) {
+            rodape.remove();
+        } else {
+            contagem.textContent = `Mostrando ${mostrados} de ${visiveis.length} produtos`;
+        }
+
+        if (moverFoco && novos[0]) {
+            const alvo = novos[0].querySelector("a, button");
+            if (alvo) alvo.focus({ preventScroll: true });
+        }
+    };
+
+    catalogo.appendChild(rodape);
+
+    botao.addEventListener("click", () => mostrarMais(true));
+
+    mostrarMais(false);
 }
 
 async function carregarProdutos() {

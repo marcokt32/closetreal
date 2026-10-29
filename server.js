@@ -486,7 +486,7 @@ const FONTES = {
     nunito: { nome: "Nunito (suave e arredondada)", familia: "Nunito", arquivo: "nunito" },
     playfair: { nome: "Playfair Display (elegante, serifada)", familia: "Playfair Display", arquivo: "playfair-display" },
     lora: { nome: "Lora (clássica, serifada)", familia: "Lora", arquivo: "lora" },
-    parisienne: { nome: "Parisienne (cursiva, manuscrita)", familia: "Parisienne", arquivo: "parisienne", pesos: [400], extra: ".logo h1{font-size:2.4rem;} h1,h2,h3,h4,.logo h1,.fx-titulo,.hero h2{font-weight:400;}" }
+    parisienne: { nome: "Parisienne (cursiva, manuscrita)", familia: "Parisienne", arquivo: "parisienne", pesos: [400], ajusteLogo: "font-size: 2.4rem; line-height: 1.1;" }
 };
 
 const APARENCIA_PADRAO = {
@@ -497,7 +497,8 @@ const APARENCIA_PADRAO = {
     intervalo: 6,
     cor_primaria: TemaCores.PADRAO,
     fonte_titulos: "padrao",
-    fonte_texto: "padrao"
+    fonte_texto: "padrao",
+    fonte_logo: "padrao"
 };
 
 let aparencia = { ...APARENCIA_PADRAO };
@@ -542,8 +543,9 @@ function validarAparencia(b) {
 
     const fonteTitulos = String(corpo.fonte_titulos || "padrao");
     const fonteTexto = String(corpo.fonte_texto || "padrao");
+    const fonteLogo = String(corpo.fonte_logo || "padrao");
 
-    if (!FONTES[fonteTitulos] || !FONTES[fonteTexto]) throw erroValidacao("Fonte inválida");
+    if (!FONTES[fonteTitulos] || !FONTES[fonteTexto] || !FONTES[fonteLogo]) throw erroValidacao("Fonte inválida");
 
     return {
         banners_pc: banners(corpo.banners_pc, "Banner do computador"),
@@ -553,7 +555,8 @@ function validarAparencia(b) {
         intervalo,
         cor_primaria: cor,
         fonte_titulos: fonteTitulos,
-        fonte_texto: fonteTexto
+        fonte_texto: fonteTexto,
+        fonte_logo: fonteLogo
     };
 }
 
@@ -616,14 +619,19 @@ function gerarCssTematico(nome, original) {
     // As declarações das fontes e a regra dos títulos entram uma única vez, no style.css (todas as páginas usam)
     if (nome === "style") {
 
-        const faces = blocosDeFonte(aparencia.fonte_texto, aparencia.fonte_titulos);
+        const faces = blocosDeFonte(aparencia.fonte_texto, aparencia.fonte_titulos, aparencia.fonte_logo);
 
         if (faces) css = `${faces}\n${css}`;
 
-        if (titulos.extra) css += "\n" + titulos.extra + "\n";
+        const regraFonte = (seletor, f, ajuste) => !f.familia ? "" :
+            `\n${seletor} { font-family: '${f.familia}', 'Segoe UI', serif;${f.pesos ? ' font-weight: ' + f.pesos[0] + ';' : ''}${ajuste ? ' ' + ajuste : ''} }\n`;
 
-        if (titulos.familia) {
-            css += `\nh1, h2, h3, h4, .logo h1, .fx-titulo, .hero h2 { font-family: '${titulos.familia}', 'Segoe UI', serif; }\n`;
+        css += regraFonte("h1, h2, h3, h4, .logo h1, .fx-titulo, .hero h2", titulos);
+
+        // fonte própria do nome da loja (em "padrao", o nome segue a fonte dos títulos)
+        if (aparencia.fonte_logo !== "padrao") {
+            const fl = FONTES[aparencia.fonte_logo];
+            css += regraFonte("header .logo h1", fl, fl.ajusteLogo);
         }
     }
 
@@ -641,7 +649,7 @@ app.get(/^\/([a-z0-9-]+)\.css$/, async (req, res, next) => {
         const arquivo = path.join(__dirname, "public", `${nome}.css`);
         const { mtimeMs } = await fs.promises.stat(arquivo);
 
-        const chave = [nome, mtimeMs, aparencia.cor_primaria, aparencia.fonte_texto, aparencia.fonte_titulos].join("|");
+        const chave = [nome, mtimeMs, aparencia.cor_primaria, aparencia.fonte_texto, aparencia.fonte_titulos, aparencia.fonte_logo].join("|");
 
         let guardado = cacheDeCss.get(chave);
 

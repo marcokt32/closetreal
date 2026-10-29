@@ -319,18 +319,19 @@ function renderizarCores() {
 
 function aplicarAmostras() {
     $("amostraTitulo").style.fontFamily = FAMILIAS[cfg.fonte_titulos] || FAMILIAS.padrao;
+    $("amostraLogo").style.fontFamily = cfg.fonte_logo === "padrao" ? (FAMILIAS[cfg.fonte_titulos] || FAMILIAS.padrao) : (FAMILIAS[cfg.fonte_logo] || FAMILIAS.padrao);
     $("amostraTexto").style.fontFamily = FAMILIAS[cfg.fonte_texto] || FAMILIAS.padrao;
 }
 
 function preencherFontes(lista) {
 
-    [["fonteTitulos", "fonte_titulos"], ["fonteTexto", "fonte_texto"]].forEach(([id, chave]) => {
+    [["fonteLogo", "fonte_logo"], ["fonteTitulos", "fonte_titulos"], ["fonteTexto", "fonte_texto"]].forEach(([id, chave]) => {
 
         const select = $(id);
         select.replaceChildren();
 
         lista.forEach(f => {
-            const op = el("option", null, f.nome);
+            const op = el("option", null, (id === "fonteLogo" && f.id === "padrao") ? "Igual \u00e0 fonte dos t\u00edtulos" : f.nome);
             op.value = f.id;
             select.appendChild(op);
         });
@@ -389,6 +390,7 @@ function renderizarTudo() {
     $("intervalo").value = String(cfg.intervalo);
     $("fonteTitulos").value = cfg.fonte_titulos;
     $("fonteTexto").value = cfg.fonte_texto;
+    $("fonteLogo").value = cfg.fonte_logo;
     aplicarAmostras();
     atualizarEstado();
 }
@@ -502,9 +504,11 @@ $("btnPadrao").addEventListener("click", () => {
     cfg.cor_primaria = padrao.cor_primaria;
     cfg.fonte_titulos = padrao.fonte_titulos;
     cfg.fonte_texto = padrao.fonte_texto;
+    cfg.fonte_logo = padrao.fonte_logo || "padrao";
 
     $("fonteTitulos").value = cfg.fonte_titulos;
     $("fonteTexto").value = cfg.fonte_texto;
+    $("fonteLogo").value = cfg.fonte_logo;
 
     renderizarCores();
     aplicarAmostras();

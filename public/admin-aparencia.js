@@ -9,7 +9,8 @@ const FAMILIAS = {
     montserrat: "'Montserrat', sans-serif",
     nunito: "'Nunito', sans-serif",
     playfair: "'Playfair Display', serif",
-    lora: "'Lora', serif"
+    lora: "'Lora', serif",
+    parisienne: "'Parisienne', cursive"
 };
 
 const LOGO_PADRAO = "/img/Logo CR fundo transparente.png";

@@ -42,17 +42,8 @@ header {
 .logo h1 {
   color: #B76E79;
   font-size: 2rem;
-  font-family: var(--fonte-titulo, inherit);
 }
 
-/* fonte escolhida para o título: <html data-fonte-titulo="parisienne"> */
-html[data-fonte-titulo="parisienne"] .logo h1 {
-  --fonte-titulo: 'Parisienne', cursive;
-  font-family: 'Parisienne', cursive;
-  font-weight: 400;
-  font-size: 2.4rem;
-  line-height: 1.1;
-}
 
 .logo span {
   color: #C0C0C0;

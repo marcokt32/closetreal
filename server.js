@@ -485,7 +485,8 @@ const FONTES = {
     montserrat: { nome: "Montserrat (limpa)", familia: "Montserrat", arquivo: "montserrat" },
     nunito: { nome: "Nunito (suave e arredondada)", familia: "Nunito", arquivo: "nunito" },
     playfair: { nome: "Playfair Display (elegante, serifada)", familia: "Playfair Display", arquivo: "playfair-display" },
-    lora: { nome: "Lora (clássica, serifada)", familia: "Lora", arquivo: "lora" }
+    lora: { nome: "Lora (clássica, serifada)", familia: "Lora", arquivo: "lora" },
+    parisienne: { nome: "Parisienne (cursiva, manuscrita)", familia: "Parisienne", arquivo: "parisienne", pesos: [400], extra: ".logo h1{font-size:2.4rem;} h1,h2,h3,h4,.logo h1,.fx-titulo,.hero h2{font-weight:400;}" }
 };
 
 const APARENCIA_PADRAO = {
@@ -593,7 +594,7 @@ function blocosDeFonte(...ids) {
 
         const f = FONTES[id];
 
-        return [400, 600, 700].map(peso =>
+        return (f.pesos || [400, 600, 700]).map(peso =>
             `@font-face{font-family:'${f.familia}';font-style:normal;font-weight:${peso};font-display:swap;` +
             `src:url('/fonts/${f.arquivo}-${peso}.woff2') format('woff2');}`
         ).join("\n");
@@ -618,6 +619,8 @@ function gerarCssTematico(nome, original) {
         const faces = blocosDeFonte(aparencia.fonte_texto, aparencia.fonte_titulos);
 
         if (faces) css = `${faces}\n${css}`;
+
+        if (titulos.extra) css += "\n" + titulos.extra + "\n";
 
         if (titulos.familia) {
             css += `\nh1, h2, h3, h4, .logo h1, .fx-titulo, .hero h2 { font-family: '${titulos.familia}', 'Segoe UI', serif; }\n`;

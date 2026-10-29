@@ -897,8 +897,7 @@ footer p {
   }
 
   .busca-header {
-    width: 100%;
-    max-width: 320px;
+    display: none;
   }
 
   .hero h2 {

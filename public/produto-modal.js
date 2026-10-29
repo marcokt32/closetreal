@@ -469,6 +469,8 @@ function abrirProduto(produto, { atualizarEndereco = true } = {}) {
 
         if (/^#produto-\d+$/.test(location.hash)) {
             history.replaceState(null, "", location.pathname + location.search);
+        } else if (/^\/produto\/\d+\/?$/.test(location.pathname)) {
+            history.replaceState(null, "", "/" + location.search);
         }
     });
 
@@ -495,7 +497,7 @@ function abrirProduto(produto, { atualizarEndereco = true } = {}) {
 // Endereço da página: /#produto-123 abre direto o produto (e o botão "voltar" fecha o card)
 function abrirProdutoDoEndereco() {
 
-    const m = /^#produto-(\d+)$/.exec(location.hash);
+    const m = /^#produto-(\d+)$/.exec(location.hash) || /^\/produto\/(\d+)\/?$/.exec(location.pathname);
 
     if (!m) {
         fecharProduto();

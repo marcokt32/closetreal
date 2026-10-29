@@ -3018,6 +3018,8 @@ async function consultarFrete(cepDestino, itens, diagnostico = []) {
     return opcoes;
 }
 
+require("./feed-produtos")(app, listarProdutos);
+
 app.get("/api/produtos", async (req, res) => {
 
     try {
